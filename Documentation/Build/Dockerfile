@@ -43,11 +43,32 @@ FROM php:8.1-apache
 RUN mkdir /DATA && \
   mkdir /DATA/HRConvert2
 
+ENV APACHE_RUN_USER  www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR   /var/log/apache2
+ENV APACHE_PID_FILE  /var/run/apache2/apache2.pid
+ENV APACHE_RUN_DIR   /var/run/apache2
+ENV APACHE_LOCK_DIR  /var/lock/apache2
+ENV APACHE_LOG_DIR   /var/log/apache2
+
+RUN mkdir -p $APACHE_RUN_DIR && \
+    mkdir -p $APACHE_LOCK_DIR && \
+    mkdir -p $APACHE_LOG_DIR
+
+RUN mkdir /var/www/html/HRProprietary && \
+    mkdir /var/www/html/HRProprietary/HRConvert2 && \
+    mkdir /var/www/html/HRProprietary/HRConvert2/Logs && \
+    mkdir /home/converter && \
+    chmod -R 0755 /home/converter && \
+    chown -R www-data /home/converter && \
+    chgrp -R www-data /home/converter
+
 # Set permissions for required directories.
 RUN chmod -R 0755 /DATA && \
   chown -R www-data:www-data /DATA && \
   chmod -R 0755 /var/www/html && \
-  chown -R www-data:www-data /var/www/html
+  chown -R www-data /var/www/html && \
+  chgrp -R www-data /var/www/html && 
 
 # Set the working directory in the container.
 WORKDIR /var/www/html/HRProprietary
