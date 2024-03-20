@@ -68,7 +68,7 @@ RUN chmod -R 0755 /DATA && \
   chown -R www-data:www-data /DATA && \
   chmod -R 0755 /var/www/html && \
   chown -R www-data /var/www/html && \
-  chgrp -R www-data /var/www/html && 
+  chgrp -R www-data /var/www/html
 
 # Set the working directory in the container.
 WORKDIR /var/www/html/HRProprietary
