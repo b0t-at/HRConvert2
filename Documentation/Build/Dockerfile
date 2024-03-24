@@ -43,13 +43,6 @@ FROM php:8.1-apache
 RUN mkdir /DATA && \
   mkdir /DATA/HRConvert2
 
-# Set permissions for required directories.
-RUN chmod -R 0755 /DATA && \
-  chown -R www-data:www-data /DATA && \
-  chmod -R 0755 /var/www/html && \
-  chown -R www-data /var/www/html && \
-  chgrp -R www-data /var/www/html
-
 # Set the working directory in the container.
 WORKDIR /var/www/html/HRProprietary
 
@@ -88,15 +81,11 @@ RUN cp HRConvert2/Documentation/Build/php.ini /usr/local/etc/php/php.ini
 RUN cp HRConvert2/index.html /var/www/html/index.html
 RUN cp HRConvert2/index.html /var/www/html/HRProprietary/index.html
 
-#RUN mkdir /var/www/html/HRProprietary/HRConvert2/Logs && \
-#    mkdir /home/converter && \
-#    chmod -R 0755 /home/converter && \
-#    chown -R www-data /home/converter && \
-#    chgrp -R www-data /home/converter
-
-RUN chmod -R 0755 /var/www/html && \
-    chown -R www-data /var/www/html && \
-    chgrp -R www-data /var/www/html
+# Set permissions for required directories.
+RUN chmod -R 0755 /DATA && \
+  chown -R www-data:www-data /DATA && \
+  chmod -R 0755 /var/www/html && \
+  chown -R www-data:www-data /var/www/html
 
 # Expose the ports Apache listens on to the host.
 # Set these to whatever ports suits your needs.
