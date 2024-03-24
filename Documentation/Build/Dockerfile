@@ -84,7 +84,7 @@ RUN apt-get install -y clamav unoconv p7zip-full meshlab dia pandoc python3 zip 
 RUN apt-get install -y xpdf mkisofs imagemagick meshlab tesseract-ocr tar
 
 # Copy required files.
-RUN cp HRConvert2/Documentation/Build/php.ini /usr/local/etc/php.ini
+RUN cp HRConvert2/Documentation/Build/php.ini /usr/local/etc/php/php.ini
 RUN cp HRConvert2/index.html /var/www/html/index.html
 RUN cp HRConvert2/index.html /var/www/html/HRProprietary/index.html
 
