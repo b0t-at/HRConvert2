@@ -53,14 +53,14 @@ RUN apt-get update
 RUN apt-get install -y git sed
 
 # Download the latest HRConvert2 source code from the official repository.
-COPY ../../ /var/www/html/HRProprietary/HRConvert2/
+COPY . /var/www/html/HRProprietary/HRConvert2/
 
 # Add non-free repos to software sources. Required for rar support.
 # There are two options for accomplishing this. 
 # Uncomment the option that suits your needs, and comment out the other.
 #   The first option replaces the debian.sources file.
 #   The second option modifies the existing debian.sources file in-place.
-COPY debian.sources /etc/apt/sources.list.d/debian.sources
+COPY Build/debian.sources /etc/apt/sources.list.d/debian.sources
 #RUN sed -i -e's/ main/ main contrib non-free/g' /etc/apt/sources.list.d/debian.sources
 
 # Re-process the updated debian.sources file and install dependencies.
@@ -75,9 +75,9 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install gd zip
 
 # Copy required files.
-COPY php.ini /usr/local/etc/php/php.ini
-COPY ../../index.html /var/www/html/index.html
-COPY ../..//index.html /var/www/html/HRProprietary/index.html
+COPY Build/php.ini /usr/local/etc/php/php.ini
+COPY Build/index.html /var/www/html/index.html
+COPY Build/index.html /var/www/html/HRProprietary/index.html
 
 # Set permissions for required directories.
 RUN chmod -R 0755 /DATA && \
